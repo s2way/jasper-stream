@@ -1,0 +1,30 @@
+{
+  "name": "jasper-stream",
+  "version": "0.1.0",
+  "description": "Jasper Stream Connector",
+  "main": "main.coffee",
+  "scripts": {
+    "pretest": "node_modules/.bin/coffeelint -f coffeelint.json src",
+    "test": "mocha test --recursive -R progress --compilers coffee:coffee-script/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s2way/jasper-stream.git"
+  },
+  "keywords": [
+    "jasper",
+    "stream",
+    "connector"
+  ],
+  "author": "Newborns/S2Way",
+  "bugs": {
+    "url": "https://github.com/s2way/jasper-stream/issues"
+  },
+  "homepage": "https://github.com/s2way/jasper-stream",
+  "devDependencies": {
+    "coffee-script": "latest",
+    "coffeelint": "1.9.4",
+    "expect.js": "0.3.1",
+    "mocha": "2.2.4"
+  }
+}
