@@ -1,23 +1,28 @@
+path = require 'path'
+
 class JasperStream
 
-    jarPath = '../bin/jasper-report.jar'
+    jarPath = path.join __dirname, '..', '/bin/jasper-report.jar'
 
-    streamData: (records, params, callback) ->
+    push: (records, params, callback) ->
         if records?
             jasper = require('child_process').spawn 'java', ['-jar', jarPath, '', "#{JSON.stringify(params)}"]
         else
             jasper = require('child_process').spawn 'java', ['-jar', jarPath, "#{JSON.stringify(params)}"]
 
-        destination = require('fs').createWriteStream "#{params.report_name}"
+        destination = require('fs').createWriteStream "#{params.file_path}"
         error = require('fs').createWriteStream 'err.log'
 
         destination.on 'error', (data) ->
+            console.log 'destination error', data
             error.write "Destination error: #{data}"
 
         jasper.stdin.on 'error', (data) ->
+            console.log 'stdin error', data
             error.write "Stdin error: #{data}"
 
         jasper.stdout.on 'error', (data) ->
+            console.log 'stdout error', data
             error.write "Stdout error: #{data}"
 
         jasper.stdout.on 'data', (data) ->
