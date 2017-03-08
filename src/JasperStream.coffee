@@ -30,7 +30,7 @@ class JasperStream
 
         jasper.stdout.on 'end', ->
             destination.end()
-            callback()
+            callback null, params.file_path
 
         jasper.stdin.write JSON.stringify(records), 'utf8'
 
